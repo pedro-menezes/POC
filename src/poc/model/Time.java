@@ -17,13 +17,15 @@ public class Time {
     private int prioridade;
     private ImageIcon escudo;
     private Campo campo;
+    private String abreviacao;
     
-    public Time(int codigo, String nome, int prioridade, ImageIcon escudo, Campo campo) {
+    public Time(int codigo, String nome, int prioridade, ImageIcon escudo, Campo campo, String abreviacao) {
         this.codigo = codigo;
         this.nome = nome;
         this.prioridade = prioridade;
         this.escudo = escudo;
         this.campo = campo;
+        this.abreviacao = abreviacao;
     }
 
     public Time() {

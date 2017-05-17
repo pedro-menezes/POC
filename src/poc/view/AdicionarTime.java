@@ -12,6 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuBar;
+import poc.control.CampeonatoController;
+import poc.control.CampoController;
+import poc.control.TimeController;
 import poc.model.Campeonato;
 import poc.model.Campo;
 import poc.model.Time;
@@ -21,9 +24,11 @@ import poc.model.Time;
  */
 public class AdicionarTime extends javax.swing.JInternalFrame {
     private Campeonato campeonato;
-    private Time time;
+    private TimeController timeControl;
+    private CampoController campoControl;
+    private CampeonatoController champControl;
     private Campo campo;
-    private Time arrayTime[];
+    private Time time;
     /**
      * Creates new form AdicionarTimee
      */
@@ -89,7 +94,7 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
             }
         });
 
-        comboPrioridade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboPrioridade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100" }));
 
         labelEscudo.setText("Escudo");
 
@@ -190,17 +195,24 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
 
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
         // TODO add your handling code here:
-        time = new Time();
-        campo = new Campo();
-        campeonato = new Campeonato();
-        time.setNome(labelNome.getText());
-        campo.setNome(labelCampo.getText());
-        time.setCampo(campo);
-        time.setPrioridade(comboPrioridade.getItemCount());
+       
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
     private void buttonAddOutroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddOutroActionPerformed
         // TODO add your handling code here:
+        campoControl = new CampoController();
+        campo = new Campo();
+        champControl = new CampeonatoController();
+        timeControl = new TimeController();
+        
+        if(campoControl.verificar(textCampo.getText()) == true){
+           campo = campoControl.cadastrar(textCampo.getText());
+           if(timeControl.verificar(textNome.getText()) == true){
+           time = new Time(0, textNome.getText(), comboPrioridade.getItemCount(), null, null, textAbreviacao.getText());
+           }
+        } else if(campoControl.verificar(textCampo.getText()) == false){
+            
+        }
         
     }//GEN-LAST:event_buttonAddOutroActionPerformed
 
