@@ -5,27 +5,29 @@
  */
 package poc.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Joao
  */
 public class Campeonato {
-    private Time[] times;
+    private ArrayList<Time> times = new ArrayList<>();
     private MatrizDistancia distancias;
 
-    public Campeonato(Time[] times, MatrizDistancia distancias) {
+    public Campeonato(ArrayList<Time> times, MatrizDistancia distancias) {
         this.times = times;
         this.distancias = distancias;
     }
-
+    
     public Campeonato() {
     }
 
-    public Time[] getTimes() {
+    public ArrayList<Time> getTimes() {
         return times;
     }
 
-    public void setTimes(Time[] times) {
+    public void setTimes(ArrayList<Time> times) {
         this.times = times;
     }
 

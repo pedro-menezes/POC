@@ -11,15 +11,20 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import poc.control.CampeonatoController;
+import poc.model.Campeonato;
+import poc.model.Time;
 
 /**
  *
  * @author pedro_menezes
  */
 public class Principal extends javax.swing.JFrame {
+    private static Campeonato campeonato = new Campeonato();
 
     /**
      * Creates new form Principal
@@ -91,6 +96,11 @@ public class Principal extends javax.swing.JFrame {
         butonSalvar.setFocusable(false);
         butonSalvar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         butonSalvar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        butonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butonSalvarActionPerformed(evt);
+            }
+        });
         toolBar.add(butonSalvar);
 
         buttonAddTime.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poc/view/icons/addTime.png"))); // NOI18N
@@ -262,8 +272,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAbrirActionPerformed
 
     private void buttonAddTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddTimeActionPerformed
-        AdicionarTime addTime = new AdicionarTime();
+        AdicionarTime addTime = new AdicionarTime(campeonato);
         verifInternal(addTime);
+       
+      
     }//GEN-LAST:event_buttonAddTimeActionPerformed
 
     private void buttonDistanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDistanciasActionPerformed
@@ -277,6 +289,15 @@ public class Principal extends javax.swing.JFrame {
         this.centralizarTudo();
     }//GEN-LAST:event_desktopPaneComponentResized
 
+    private void butonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonSalvarActionPerformed
+        // TODO add your handling code here:
+          ArrayList<Time> time = campeonato.getTimes();
+          System.out.println("Array Principal");
+        for (Time time1 : time) {
+            System.out.println(time1.getNome());
+        }
+    }//GEN-LAST:event_butonSalvarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -288,7 +309,7 @@ public class Principal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -321,7 +342,7 @@ public class Principal extends javax.swing.JFrame {
             System.out.println("File access cancelled by user.");
         }
     }
-    
+
     private void centralizarTudo() {
         JInternalFrame[] array = desktopPane.getAllFrames();
         for (JInternalFrame internal : array) {
@@ -331,7 +352,7 @@ public class Principal extends javax.swing.JFrame {
                     (desktopSize.height - jInternalFrameSize.height) / 2);
         }
     }
-    
+
     private void verifInternal(JInternalFrame internal) {
         boolean verif = false;
         JInternalFrame[] array = desktopPane.getAllFrames();
@@ -350,7 +371,7 @@ public class Principal extends javax.swing.JFrame {
             addInternal(internal);
         }
     }
-    
+
     private void centralizar(JInternalFrame internal) {
         Dimension desktopSize = desktopPane.getSize();
         Dimension jInternalFrameSize = internal.getSize();
@@ -358,7 +379,7 @@ public class Principal extends javax.swing.JFrame {
                 (desktopSize.height - jInternalFrameSize.height) / 2);
     }
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton butonSalvar;
     private javax.swing.JButton buttonAbrir;

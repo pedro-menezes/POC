@@ -7,36 +7,46 @@ package poc.view;
 
 //import java.awt.Dimension;
 //import javax.swing.JComponent;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import poc.control.CampeonatoController;
 import poc.control.CampoController;
 import poc.control.TimeController;
 import poc.model.Campeonato;
 import poc.model.Campo;
 import poc.model.Time;
+
 /**
  *
  * @author Leandro
  */
 public class AdicionarTime extends javax.swing.JInternalFrame {
+
     private Campeonato campeonato;
     private TimeController timeControl;
     private CampoController campoControl;
     private CampeonatoController champControl;
     private Campo campo;
     private Time time;
+    private ArrayList<Time> times = new ArrayList<Time>();
+
     /**
      * Creates new form AdicionarTimee
      */
-    public AdicionarTime() {
+    public AdicionarTime(Campeonato campeonato) {
         initComponents();
+        this.campeonato = campeonato;
         //removeTitleBar();
     }
-
+    
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,6 +56,7 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        seletorArquivos = new javax.swing.JFileChooser();
         labelNome = new javax.swing.JLabel();
         labelAbreviacao = new javax.swing.JLabel();
         labelPrioridade = new javax.swing.JLabel();
@@ -185,38 +196,67 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_butttonCancelarActionPerformed
 
     private void buttonEscudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEscudoActionPerformed
-        try {
-            // TODO add your handling code here:
-            Runtime.getRuntime().exec("explorer");
-        } catch (IOException ex) {
-            Logger.getLogger(AdicionarTime.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       abrirSeletorArquivos();
     }//GEN-LAST:event_buttonEscudoActionPerformed
 
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
         // TODO add your handling code here:
-       
+        campoControl = new CampoController();
+        campo = new Campo(1, textCampo.getText());
+        champControl = new CampeonatoController();
+        timeControl = new TimeController();
+
+        time = new Time(1, textNome.getText(), comboPrioridade.getItemCount(), null, campo, textAbreviacao.getText());
+
+        if (timeControl.verificarCadastro(time, campeonato) == false) {
+            JOptionPane.showMessageDialog(null, "Time já cadastrado!", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            champControl.cadastrarTime(time, campeonato);
+            times = campeonato.getTimes();
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        this.dispose();
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
     private void buttonAddOutroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddOutroActionPerformed
         // TODO add your handling code here:
         campoControl = new CampoController();
-        campo = new Campo();
+        campo = new Campo(1, textCampo.getText());
         champControl = new CampeonatoController();
         timeControl = new TimeController();
-        
-        if(campoControl.verificar(textCampo.getText()) == true){
-           campo = campoControl.cadastrar(textCampo.getText());
-           if(timeControl.verificar(textNome.getText()) == true){
-           time = new Time(0, textNome.getText(), comboPrioridade.getItemCount(), null, null, textAbreviacao.getText());
-           }
-        } else if(campoControl.verificar(textCampo.getText()) == false){
-            
+
+        time = new Time(1, textNome.getText(), comboPrioridade.getItemCount(), null, campo, textAbreviacao.getText());
+
+        if (timeControl.verificarCadastro(time, campeonato) == false) {
+            JOptionPane.showMessageDialog(null, "Time já cadastrado!", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            champControl.cadastrarTime(time, campeonato);
+            times = campeonato.getTimes();
+
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
         }
-        
+
+        System.out.println("Lista de Cadastrados");
+        for (Time time1 : times) {
+            System.out.println(time1.getNome());
+        }
+        /* if (campoControl.verificar(textCampo.getText(), champControl) == true) {
+            campo = campoControl.cadastrar(textCampo.getText());
+            if (timeControl.verificar(textNome.getText()) == true) {
+                time = new Time(0, textNome.getText(), comboPrioridade.getItemCount(), null, campo, textAbreviacao.getText());
+                int cont = champControl.tamanhoArray();
+                times[cont + 1] = time;
+                champControl.addTime(times);
+            }
+        } else if (campoControl.verificar(textCampo.getText(), champControl) == false) {
+
+        }*/
+
     }//GEN-LAST:event_buttonAddOutroActionPerformed
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAddOutro;
     private javax.swing.JButton buttonConfirmar;
@@ -228,8 +268,19 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
     private javax.swing.JLabel labelEscudo;
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelPrioridade;
+    private javax.swing.JFileChooser seletorArquivos;
     private javax.swing.JTextField textAbreviacao;
     private javax.swing.JTextField textCampo;
     private javax.swing.JTextField textNome;
     // End of variables declaration//GEN-END:variables
+
+    private void abrirSeletorArquivos() {
+        int returnVal = seletorArquivos.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = seletorArquivos.getSelectedFile();
+            System.out.println("CERTO");
+        } else {
+            System.out.println("File access cancelled by user.");
+        }
+    }
 }

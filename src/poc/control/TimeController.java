@@ -5,6 +5,7 @@
  */
 package poc.control;
 
+import java.util.ArrayList;
 import poc.model.Campeonato;
 import poc.model.Campo;
 import poc.model.Time;
@@ -15,22 +16,23 @@ import poc.model.Time;
  */
 public class TimeController {
     private Campo campo;
-    private int codigo = 1;
     private Campeonato campeonato;
-    private CampeonatoController champController;    
-    private Time times[];
+    private CampeonatoController champControl;    
+    private ArrayList<Time> times;
     
-    public Time cadastrar(Time time){
-        campo = new Campo();
-        champController = new CampeonatoController();
+    public boolean verificarCadastro(Time time, Campeonato campeonato){
+        times = campeonato.getTimes();
         
+        for (Time time1 : times) {
+            if (time1.getNome().equals(time.getNome())) {
+                return false;
+            }
+        }
         
-        codigo++;
-        
-        return time;
+        return true;
     }
     
-    public boolean verificar(String nome){
+    /*public boolean verificar(String nome){
         campeonato = new Campeonato();
         times = campeonato.getTimes();
         
@@ -40,5 +42,5 @@ public class TimeController {
             }
         }
         return true;
-    }
+    }*/
 }
