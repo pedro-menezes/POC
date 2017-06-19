@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import poc.control.CampeonatoController;
 import poc.model.Campeonato;
 import poc.model.Time;
@@ -39,6 +40,23 @@ public class Principal extends javax.swing.JFrame {
         jIFrame.setVisible(true);
     }
 
+    public void organizarTabela(){
+        DefaultTableModel modeloTabela = new DefaultTableModel();
+        modeloTabela.addColumn("Código");
+        modeloTabela.addColumn("Time");
+      
+        ArrayList<Time> times = campeonato.getTimes();
+       
+        if (times.isEmpty()) {
+            modeloTabela.addRow(new String[]{"Sem informação","Sem informação"});
+        } else {
+            for (int i = 0; i < times.size(); i++) {
+                modeloTabela.addRow(new String[]{String.valueOf(times.get(i).getCodigo()),times.get(i).getNome()});
+            }
+        }
+        tableTimes.setModel(modeloTabela);
+        tableTimes.setEnabled(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,6 +73,7 @@ public class Principal extends javax.swing.JFrame {
         buttonAddTime = new javax.swing.JButton();
         buttonDistancias = new javax.swing.JButton();
         buttonTabela = new javax.swing.JButton();
+        buttonAtualizar = new javax.swing.JButton();
         desktopPane = new javax.swing.JDesktopPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTimes = new javax.swing.JTable();
@@ -133,6 +152,18 @@ public class Principal extends javax.swing.JFrame {
         buttonTabela.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonTabela.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         toolBar.add(buttonTabela);
+
+        buttonAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poc/view/icons/atualizar.png"))); // NOI18N
+        buttonAtualizar.setToolTipText("Atualizar");
+        buttonAtualizar.setFocusable(false);
+        buttonAtualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonAtualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtualizarActionPerformed(evt);
+            }
+        });
+        toolBar.add(buttonAtualizar);
 
         desktopPane.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
@@ -298,6 +329,11 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_butonSalvarActionPerformed
 
+    private void buttonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarActionPerformed
+        // TODO add your handling code here:
+        organizarTabela();
+    }//GEN-LAST:event_buttonAtualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -384,6 +420,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton butonSalvar;
     private javax.swing.JButton buttonAbrir;
     private javax.swing.JButton buttonAddTime;
+    private javax.swing.JButton buttonAtualizar;
     private javax.swing.JButton buttonDistancias;
     private javax.swing.JButton buttonTabela;
     private javax.swing.JDesktopPane desktopPane;

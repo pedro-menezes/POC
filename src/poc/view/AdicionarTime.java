@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
@@ -43,10 +44,20 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
     public AdicionarTime(Campeonato campeonato) {
         initComponents();
         this.campeonato = campeonato;
+        organizarCombo();
         //removeTitleBar();
     }
-    
-   
+
+  
+
+    public void organizarCombo() {
+        DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
+        for (int i = 1; i < 101; i++) {
+            modeloCombo.addElement(i);
+        }
+        comboPrioridade.setModel(modeloCombo);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -196,7 +207,7 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_butttonCancelarActionPerformed
 
     private void buttonEscudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEscudoActionPerformed
-       abrirSeletorArquivos();
+        abrirSeletorArquivos();
     }//GEN-LAST:event_buttonEscudoActionPerformed
 
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
@@ -206,7 +217,10 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
         champControl = new CampeonatoController();
         timeControl = new TimeController();
 
-        time = new Time(1, textNome.getText(), comboPrioridade.getItemCount(), null, campo, textAbreviacao.getText());
+        int codigo = campeonato.getTimes().size() + 1;
+        int selecionado = comboPrioridade.getSelectedIndex();
+
+        time = new Time(codigo, textNome.getText(), selecionado, null, campo, textAbreviacao.getText());
 
         if (timeControl.verificarCadastro(time, campeonato) == false) {
             JOptionPane.showMessageDialog(null, "Time já cadastrado!", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
@@ -226,7 +240,9 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
         champControl = new CampeonatoController();
         timeControl = new TimeController();
 
-        time = new Time(1, textNome.getText(), comboPrioridade.getItemCount(), null, campo, textAbreviacao.getText());
+        int codigo = campeonato.getTimes().size() + 1;
+
+        time = new Time(codigo, textNome.getText(), comboPrioridade.getItemCount(), null, campo, textAbreviacao.getText());
 
         if (timeControl.verificarCadastro(time, campeonato) == false) {
             JOptionPane.showMessageDialog(null, "Time já cadastrado!", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
