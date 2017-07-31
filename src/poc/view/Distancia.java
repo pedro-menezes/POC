@@ -5,19 +5,43 @@
  */
 package poc.view;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import poc.model.Campeonato;
+import poc.model.Time;
 
 /**
  *
  * @author alunos
  */
 public class Distancia extends javax.swing.JInternalFrame {
-
+    private Campeonato campeonato;
     /**
      * Creates new form Distancia
      */
-    public Distancia() {
+    public Distancia(Campeonato campeonato) {
         initComponents();
+        this.campeonato = campeonato;
+        organizarTabela();
+    }
+    
+    public void organizarTabela(){
+        DefaultTableModel modeloTabela = new DefaultTableModel();
+        modeloTabela.addColumn("Código");
+        modeloTabela.addColumn("Time");
+      
+        ArrayList<Time> times = campeonato.getTimes();
+       
+        if (times.isEmpty()) {
+            modeloTabela.addRow(new String[]{"Sem informação","Sem informação"});
+        } else {
+            for (int i = 0; i < times.size(); i++) {
+                modeloTabela.addRow(new String[]{String.valueOf(times.get(i).getCodigo()),times.get(i).getNome()});
+            }
+        }
+        tableDistancia.setModel(modeloTabela);
+        tableDistancia.setEnabled(false);
     }
 
     /**

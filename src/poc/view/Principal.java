@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
@@ -25,6 +26,7 @@ import poc.model.Time;
  * @author pedro_menezes
  */
 public class Principal extends javax.swing.JFrame {
+
     private static Campeonato campeonato = new Campeonato();
 
     /**
@@ -40,23 +42,24 @@ public class Principal extends javax.swing.JFrame {
         jIFrame.setVisible(true);
     }
 
-    public void organizarTabela(){
+    public void organizarTabela() {
         DefaultTableModel modeloTabela = new DefaultTableModel();
         modeloTabela.addColumn("Código");
         modeloTabela.addColumn("Time");
-      
+
         ArrayList<Time> times = campeonato.getTimes();
-       
+
         if (times.isEmpty()) {
-            modeloTabela.addRow(new String[]{"Sem informação","Sem informação"});
+            modeloTabela.addRow(new String[]{"Sem informação", "Sem informação"});
         } else {
             for (int i = 0; i < times.size(); i++) {
-                modeloTabela.addRow(new String[]{String.valueOf(times.get(i).getCodigo()),times.get(i).getNome()});
+                modeloTabela.addRow(new String[]{String.valueOf(times.get(i).getCodigo()), times.get(i).getNome()});
             }
         }
         tableTimes.setModel(modeloTabela);
         tableTimes.setEnabled(false);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -305,13 +308,13 @@ public class Principal extends javax.swing.JFrame {
     private void buttonAddTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddTimeActionPerformed
         AdicionarTime addTime = new AdicionarTime(campeonato);
         verifInternal(addTime);
-       
-      
+
+
     }//GEN-LAST:event_buttonAddTimeActionPerformed
 
     private void buttonDistanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDistanciasActionPerformed
         // TODO add your handling code here:
-        Distancia dist = new Distancia();
+        Distancia dist = new Distancia(campeonato);
         verifInternal(dist);
     }//GEN-LAST:event_buttonDistanciasActionPerformed
 
@@ -322,10 +325,25 @@ public class Principal extends javax.swing.JFrame {
 
     private void butonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonSalvarActionPerformed
         // TODO add your handling code here:
-          ArrayList<Time> time = campeonato.getTimes();
-          System.out.println("Array Principal");
-        for (Time time1 : time) {
-            System.out.println(time1.getNome());
+        ArrayList<Time> time = campeonato.getTimes();
+        String newLine = System.getProperty("line.separator");
+        File arquivo = new File("Arquivo.champ");
+        try {
+            if (arquivo.createNewFile()) {
+                System.out.println("O arquivo foi criado");
+            } else {
+                System.out.println("O arquivo não foi criado, talvez ele já exista");
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        try (FileWriter fw = new FileWriter(arquivo)) {
+            for (Time time1 : time) {
+                fw.write(time1.getNome()+newLine);
+            }
+            fw.flush();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_butonSalvarActionPerformed
 
