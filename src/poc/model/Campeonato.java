@@ -6,20 +6,15 @@
 package poc.model;
 
 import java.util.ArrayList;
-
+import poc.model.ModelDistancia;
 /**
  *
  * @author Joao
  */
 public class Campeonato {
     private ArrayList<Time> times = new ArrayList<>();
-    private MatrizDistancia distancias;
+    private ArrayList<ModelDistancia> distancias = new ArrayList<>();
 
-    public Campeonato(ArrayList<Time> times, MatrizDistancia distancias) {
-        this.times = times;
-        this.distancias = distancias;
-    }
-    
     public Campeonato() {
     }
 
@@ -31,13 +26,12 @@ public class Campeonato {
         this.times = times;
     }
 
-    public MatrizDistancia getDistancias() {
+    public ArrayList<ModelDistancia> getDistancias() {
         return distancias;
     }
 
-    public void setDistancias(MatrizDistancia distancias) {
-        this.distancias = distancias;
+    public void setDistancias(ModelDistancia distancias) {
+        this.distancias.add(distancias);
     }
-    
     
 }

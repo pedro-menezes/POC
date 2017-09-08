@@ -52,4 +52,7 @@ public class MatrizDistancia {
         return ordem;
     }
 
+    public float[] getDistancia() {
+        return distancia;
+    }
 }

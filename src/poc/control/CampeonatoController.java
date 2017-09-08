@@ -7,7 +7,10 @@ package poc.control;
 
 import java.util.ArrayList;
 import poc.model.Campeonato;
+import poc.model.MatrizDistancia;
+import poc.model.ModelDistancia;
 import poc.model.Time;
+import poc.view.Distancia;
 
 /**
  *
@@ -15,6 +18,13 @@ import poc.model.Time;
  */
 public class CampeonatoController {
   
+    private int ordem;
+    
+    public CampeonatoController(){
+        
+    }
+    
+    
     public void cadastrarTime(Time time, Campeonato campeonato){
         ArrayList<Time> times = campeonato.getTimes();
         times.add(time);
@@ -36,4 +46,7 @@ public class CampeonatoController {
         System.out.println(campeonato.getTimes().length);
         return campeonato.getTimes().length;
     }*/
+     public void cadastrarDistancias(ModelDistancia distancia, Campeonato campeonato){
+         campeonato.setDistancias(distancia);
+     }
 }

@@ -5,10 +5,25 @@
  */
 package poc.view;
 
+import java.awt.BorderLayout;
+import java.awt.List;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import poc.control.CampeonatoController;
 import poc.model.Campeonato;
+import poc.model.MatrizDistancia;
+import poc.model.ModelDistancia;
 import poc.model.Time;
 
 /**
@@ -16,7 +31,9 @@ import poc.model.Time;
  * @author alunos
  */
 public class Distancia extends javax.swing.JInternalFrame {
+
     private Campeonato campeonato;
+    private CampeonatoController campController;
     /**
      * Creates new form Distancia
      */
@@ -25,23 +42,27 @@ public class Distancia extends javax.swing.JInternalFrame {
         this.campeonato = campeonato;
         organizarTabela();
     }
-    
-    public void organizarTabela(){
-        DefaultTableModel modeloTabela = new DefaultTableModel();
-        modeloTabela.addColumn("Código");
-        modeloTabela.addColumn("Time");
-      
+
+    public void organizarTabela() {
         ArrayList<Time> times = campeonato.getTimes();
-       
+
+        DefaultTableModel modeloTabela = new DefaultTableModel();
+
+        modeloTabela.addColumn("");
+
+        for (Time time : times) {
+            modeloTabela.addColumn(time.getNome());
+        }
+
         if (times.isEmpty()) {
-            modeloTabela.addRow(new String[]{"Sem informação","Sem informação"});
+            modeloTabela.addRow(new String[]{"Sem informação", "Sem informação"});
         } else {
             for (int i = 0; i < times.size(); i++) {
-                modeloTabela.addRow(new String[]{String.valueOf(times.get(i).getCodigo()),times.get(i).getNome()});
+                modeloTabela.addRow(new String[]{times.get(i).getNome()});
             }
         }
         tableDistancia.setModel(modeloTabela);
-        tableDistancia.setEnabled(false);
+
     }
 
     /**
@@ -64,6 +85,11 @@ public class Distancia extends javax.swing.JInternalFrame {
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/poc/view/icons/distancia.png"))); // NOI18N
 
         buttonCancelar.setText("Cancelar");
+        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelarActionPerformed(evt);
+            }
+        });
 
         tableDistancia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,10 +145,106 @@ public class Distancia extends javax.swing.JInternalFrame {
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
         // TODO add your handling code here:
         int opcao = JOptionPane.showConfirmDialog(rootPane, "Deseja confirmar? Não poderá ser cadastrado outro time");
-        if(opcao == 0){
-          this.dispose();
+
+        if (opcao == 0) {
+            this.dispose();;
+            /*System.out.println(tableDistancia.getValueAt(1, 3));
+            for (int i = 0; i < times.size(); i++) {
+                for (int j = 0; j < times.size(); j++) {
+                    if (j > i) {
+                        System.out.println(tableDistancia.getValueAt(i, j));
+                        distancia = (double) tableDistancia.getValueAt(i, j);
+                        System.out.println(distancia);
+                    }
+                }
+            }
+        }*/
+            ArrayList<Time> times = campeonato.getTimes();
+            // campController = new CampeonatoController(times.size());
+
+            double distancia = 0;
+
+            /*int linhaSel = tableDistancia.getSelectedRow();
+        int colunaSel = tableDistancia.getSelectedColumn();
+        System.out.println(linhaSel);
+        System.out.println(colunaSel);
+        System.out.println(teste);*/
+            int cont = times.size();
+            ArrayList<Object> distanciasObj = new ArrayList<Object>();
+            ArrayList<Time> timesA = new ArrayList<Time>();
+            ArrayList<Time> timesB = new ArrayList<Time>();
+
+            for (int i = 0; i < cont; i++) {
+                for (int j = 1; j < cont+1; j++) {
+                   if((j-1)>i){
+                    Object teste = tableDistancia.getValueAt(i, j);
+                    System.out.println(teste);
+                    distanciasObj.add(teste);
+                    System.out.println("ARRAY-> " + distanciasObj.get(i));
+                       for (Time time : times) {
+                           if (time.getCodigo() == i+1) {
+                               timesA.add(time);
+                           }
+                           if (time.getCodigo() == j) {
+                               timesB.add(time);
+                           }
+                       }
+                   }
+            }
+            }
+            for (Time time : timesA) {
+                System.out.println("TESTE timeA:"+time.getCodigo());
+            }
+            for (Time time : timesB) {
+                    System.out.println("TESTE timeB:"+time.getCodigo());
+            }
+            
+            System.out.println(distanciasObj.size());
+            System.out.println("TESTE timeA: "+timesA.size());
+            System.out.println("TESTE timeB: "+timesB.size());
+            //  for (int i = 0; i < cont; i++) {
+            //for (int j = 0; j < cont; i++) {
+            //  if (i < j) {
+            // campController.cadastrarDistancia(times.get(i), times.get(j),(float)tableDistancia.getValueAt(i,j));
+            // Object teste = tableDistancia.getValueAt(i,j);
+            //System.out.println(teste);
+            // distancias.add(tableDistancia.getValueAt(i, j));
+            // System.out.println(distancias.get(i));
+            //    }
+            //  }
+            //}
+            campController = new CampeonatoController();
+            
+            int contador = 0;
+            
+            for (Object distObj: distanciasObj) {
+                ModelDistancia modelDistancia = new ModelDistancia();
+                String converteTexto = distObj.toString();
+                System.out.println("TESTE converter:"+converteTexto+" timeA: "+timesA.get(contador).getNome()+" timeB: "+timesB.get(contador).getNome());
+                modelDistancia.setTimeA(timesA.get(contador));
+                modelDistancia.setTimeB(timesB.get(contador));
+                modelDistancia.setDistancia(Float.parseFloat(converteTexto));
+                campController.cadastrarDistancias(modelDistancia, campeonato);
+                contador++;
+            }
+            
+            ArrayList<ModelDistancia> testeMatriz = campeonato.getDistancias();
+            int tamanho = testeMatriz.size();
+            System.out.println("TESTE tamanhoDistancias: "+tamanho);
+            
+            
+            for (ModelDistancia modelDistancia : testeMatriz) {
+                System.out.println("TESTE matriz: "+modelDistancia.getTimeA()+" "+modelDistancia.getTimeB()+" "+modelDistancia.getDistancia());
+            }
+            
+            
         }
     }//GEN-LAST:event_buttonConfirmarActionPerformed
+
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_buttonCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

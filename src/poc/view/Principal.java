@@ -8,6 +8,7 @@ package poc.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -19,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import poc.control.CampeonatoController;
 import poc.model.Campeonato;
+import poc.model.MatrizDistancia;
+import poc.model.ModelDistancia;
 import poc.model.Time;
 
 /**
@@ -46,14 +49,15 @@ public class Principal extends javax.swing.JFrame {
         DefaultTableModel modeloTabela = new DefaultTableModel();
         modeloTabela.addColumn("Código");
         modeloTabela.addColumn("Time");
+        modeloTabela.addColumn("Campo");
 
         ArrayList<Time> times = campeonato.getTimes();
 
         if (times.isEmpty()) {
-            modeloTabela.addRow(new String[]{"Sem informação", "Sem informação"});
+            modeloTabela.addRow(new String[]{"Sem informação", "Sem informação", "Sem informação"});
         } else {
             for (int i = 0; i < times.size(); i++) {
-                modeloTabela.addRow(new String[]{String.valueOf(times.get(i).getCodigo()), times.get(i).getNome()});
+                modeloTabela.addRow(new String[]{String.valueOf(times.get(i).getCodigo()), times.get(i).getNome(), times.get(i).getCampo().getNome()});
             }
         }
         tableTimes.setModel(modeloTabela);
@@ -326,6 +330,7 @@ public class Principal extends javax.swing.JFrame {
     private void butonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonSalvarActionPerformed
         // TODO add your handling code here:
         ArrayList<Time> time = campeonato.getTimes();
+        ArrayList<ModelDistancia> distancias = campeonato.getDistancias();
         String newLine = System.getProperty("line.separator");
         File arquivo = new File("Arquivo.champ");
         try {
@@ -338,8 +343,13 @@ public class Principal extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         try (FileWriter fw = new FileWriter(arquivo)) {
+            fw.write(time.size() + newLine);
             for (Time time1 : time) {
-                fw.write(time1.getNome()+newLine);
+                fw.write(time1.getCodigo() + ";" + time1.getNome() + ";" + time1.getCampo().getNome() + ";" + time1.getPrioridade() + newLine);
+            }
+            fw.write("--------------------------------------------" + newLine);
+            for (ModelDistancia distancia : distancias) {
+                fw.write(distancia.getTimeA().getCodigo() + ";" + distancia.getTimeB().getCodigo() + ";" + distancia.getDistancia() + newLine);
             }
             fw.flush();
         } catch (IOException ex) {
@@ -388,12 +398,43 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void abrirSeletorArquivos(java.awt.event.ActionEvent evt) {
+        JFileChooser fileChooser = new JFileChooser();
+
         int returnVal = seletorArquivos.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = seletorArquivos.getSelectedFile();
+            String caminhoArquivo = file.getAbsolutePath();
             System.out.println("CERTO");
+            interpretarArquivo(caminhoArquivo);
         } else {
             System.out.println("File access cancelled by user.");
+        }
+    }
+
+    public void interpretarArquivo(String caminhoArquivo) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo));
+            boolean verif = false;
+            String primeiraLinha = br.readLine();
+            ArrayList<String> palavras = new ArrayList<String>();
+
+            while (br.ready()) {
+                if (verif == false) {
+                    String excluindoPrimeiralinha = br.readLine();
+                    verif = true;
+                } else if (verif == true) {
+
+                    String linha = br.readLine();
+
+                    String[] dadosArquivo = linha.split(";");
+
+                    for (int i = 0; i < dadosArquivo.length; i++) {
+                        System.out.println(dadosArquivo[i]);
+                    }
+                }
+            }
+            br.close();
+        } catch (Exception e) {
         }
     }
 
