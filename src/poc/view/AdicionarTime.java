@@ -48,8 +48,6 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
         //removeTitleBar();
     }
 
-  
-
     public void organizarCombo() {
         DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
         for (int i = 1; i < 101; i++) {
@@ -218,7 +216,7 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
         timeControl = new TimeController();
 
         int codigo = campeonato.getTimes().size() + 1;
-        int selecionado = comboPrioridade.getSelectedIndex();
+        int selecionado = comboPrioridade.getSelectedIndex()+1;
 
         time = new Time(codigo, textNome.getText(), selecionado, null, campo, textAbreviacao.getText());
 
@@ -241,8 +239,9 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
         timeControl = new TimeController();
 
         int codigo = campeonato.getTimes().size() + 1;
+        int selecionado = comboPrioridade.getSelectedIndex()+1;
 
-        time = new Time(codigo, textNome.getText(), comboPrioridade.getItemCount(), null, campo, textAbreviacao.getText());
+        time = new Time(codigo, textNome.getText(), selecionado, null, campo, textAbreviacao.getText());
 
         if (timeControl.verificarCadastro(time, campeonato) == false) {
             JOptionPane.showMessageDialog(null, "Time já cadastrado!", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);

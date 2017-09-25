@@ -14,7 +14,8 @@ import poc.model.ModelDistancia;
 public class Campeonato {
     private ArrayList<Time> times = new ArrayList<>();
     private ArrayList<ModelDistancia> distancias = new ArrayList<>();
-
+    private ArrayList<Rodada> rodadas = new ArrayList<>();
+            
     public Campeonato() {
     }
 
@@ -32,6 +33,14 @@ public class Campeonato {
 
     public void setDistancias(ModelDistancia distancias) {
         this.distancias.add(distancias);
+    }
+
+    public ArrayList<Rodada> getRodadas() {
+        return rodadas;
+    }
+
+    public void setRodadas(ArrayList<Rodada> rodadas) {
+        this.rodadas = rodadas;
     }
     
 }

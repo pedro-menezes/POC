@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import poc.control.CampeonatoController;
 import poc.model.Campeonato;
+import poc.model.Campo;
 import poc.model.MatrizDistancia;
 import poc.model.ModelDistancia;
 import poc.model.Time;
@@ -49,7 +50,7 @@ public class Principal extends javax.swing.JFrame {
         DefaultTableModel modeloTabela = new DefaultTableModel();
         modeloTabela.addColumn("Código");
         modeloTabela.addColumn("Time");
-        modeloTabela.addColumn("Campo");
+        modeloTabela.addColumn("Prioridade");
 
         ArrayList<Time> times = campeonato.getTimes();
 
@@ -57,7 +58,7 @@ public class Principal extends javax.swing.JFrame {
             modeloTabela.addRow(new String[]{"Sem informação", "Sem informação", "Sem informação"});
         } else {
             for (int i = 0; i < times.size(); i++) {
-                modeloTabela.addRow(new String[]{String.valueOf(times.get(i).getCodigo()), times.get(i).getNome(), times.get(i).getCampo().getNome()});
+                modeloTabela.addRow(new String[]{String.valueOf(times.get(i).getCodigo()), times.get(i).getNome(),String.valueOf(times.get(i).getPrioridade())});
             }
         }
         tableTimes.setModel(modeloTabela);
@@ -158,6 +159,11 @@ public class Principal extends javax.swing.JFrame {
         buttonTabela.setFocusable(false);
         buttonTabela.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonTabela.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonTabela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTabelaActionPerformed(evt);
+            }
+        });
         toolBar.add(buttonTabela);
 
         buttonAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poc/view/icons/atualizar.png"))); // NOI18N
@@ -347,7 +353,6 @@ public class Principal extends javax.swing.JFrame {
             for (Time time1 : time) {
                 fw.write(time1.getCodigo() + ";" + time1.getNome() + ";" + time1.getCampo().getNome() + ";" + time1.getPrioridade() + newLine);
             }
-            fw.write("--------------------------------------------" + newLine);
             for (ModelDistancia distancia : distancias) {
                 fw.write(distancia.getTimeA().getCodigo() + ";" + distancia.getTimeB().getCodigo() + ";" + distancia.getDistancia() + newLine);
             }
@@ -361,6 +366,12 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         organizarTabela();
     }//GEN-LAST:event_buttonAtualizarActionPerformed
+
+    private void buttonTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTabelaActionPerformed
+        // TODO add your handling code here:
+        CampeonatoController champControl = new CampeonatoController();
+        champControl.gerarTabela(campeonato);
+    }//GEN-LAST:event_buttonTabelaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -412,29 +423,57 @@ public class Principal extends javax.swing.JFrame {
     }
 
     public void interpretarArquivo(String caminhoArquivo) {
+        ArrayList<String> elementos = new ArrayList<String>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo));
-            boolean verif = false;
-            String primeiraLinha = br.readLine();
-            ArrayList<String> palavras = new ArrayList<String>();
 
             while (br.ready()) {
-                if (verif == false) {
-                    String excluindoPrimeiralinha = br.readLine();
-                    verif = true;
-                } else if (verif == true) {
 
-                    String linha = br.readLine();
+                String linha = br.readLine();
 
-                    String[] dadosArquivo = linha.split(";");
+                String[] dadosArquivo = linha.split(";");
 
-                    for (int i = 0; i < dadosArquivo.length; i++) {
-                        System.out.println(dadosArquivo[i]);
-                    }
+                for (int i = 0; i < dadosArquivo.length; i++) {
+                    System.out.println(dadosArquivo[i]);
+                    elementos.add(dadosArquivo[i]);
                 }
             }
             br.close();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível carregar o arquvio", "Erro de carregamento", ERROR);
+        }
+        fornecerDados(elementos);
+    }
+
+    private void fornecerDados(ArrayList<String> elementosArquivo) {
+        ArrayList<String> times = new ArrayList<String>();
+        ArrayList<String> distancias = new ArrayList<String>();
+        Time time = new Time();
+        Campo campo = new Campo();
+        ModelDistancia distancia = new ModelDistancia();
+        CampeonatoController champControl = new CampeonatoController();
+        int cont = 0, cont1 = 1, cont2 = 2, cont3 =3;
+        /*       fw.write(time1.getCodigo() + ";" + time1.getNome() + ";" + time1.getCampo().getNome() + ";" + time1.getPrioridade() + newLine);
+            }
+            for (ModelDistancia distancia : distancias) {
+                fw.write(distancia.getTimeA().getCodigo() + ";" + distancia.getTimeB().getCodigo() + ";" + distancia.getDistancia() + newLine);
+           */
+        
+        for (int i = 0; i < (elementosArquivo.size()/2); i++) {
+            time.setCodigo(Integer.parseInt(elementosArquivo.get(i+cont)));
+            time.setNome(elementosArquivo.get(i+cont1));
+            campo.setNome(elementosArquivo.get(i+cont2));
+            campo.setCodigo(i);
+            time.setCampo(campo);
+            time.setPrioridade(i+cont3);
+            cont = cont + 4;
+            cont1 = cont1 + 4;
+            cont2 = cont2 + 4;
+            cont3 = cont3 + 4;
+            champControl.cadastrarTime(time, campeonato);
+        }
+     {
+            
         }
     }
 

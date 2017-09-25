@@ -5,6 +5,7 @@
  */
 package poc.model;
 
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -12,13 +13,16 @@ import javax.swing.ImageIcon;
  * @author pedro_menezes
  */
 public class Time {
+
     private int codigo;
     private String nome;
     private int prioridade;
     private ImageIcon escudo;
     private Campo campo;
     private String abreviacao;
-    
+    private double distanciaViajada;
+    private ArrayList<Integer> timesJogados = new ArrayList<Integer>();
+
     public Time(int codigo, String nome, int prioridade, ImageIcon escudo, Campo campo, String abreviacao) {
         this.codigo = codigo;
         this.nome = nome;
@@ -30,7 +34,36 @@ public class Time {
 
     public Time() {
     }
-    
+
+    public void setJogou(int codigo) {
+        timesJogados.add(codigo);
+    }
+
+    public boolean getJogou(int codigo) {
+        for (int i = 0; i < timesJogados.size(); i++) {
+            if (timesJogados.get(i) == codigo) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getAbreviacao() {
+        return abreviacao;
+    }
+
+    public void setAbreviacao(String abreviacao) {
+        this.abreviacao = abreviacao;
+    }
+
+    public double getDistanciaViajada() {
+        return distanciaViajada;
+    }
+
+    public void setDistanciaViajada(double distanciaViajada) {
+        this.distanciaViajada = distanciaViajada;
+    }
+
     public int getCodigo() {
         return codigo;
     }
@@ -70,5 +103,5 @@ public class Time {
     public void setCampo(Campo campo) {
         this.campo = campo;
     }
-    
+
 }

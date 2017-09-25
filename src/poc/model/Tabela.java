@@ -11,18 +11,18 @@ import java.util.ArrayList;
  *
  * @author pedro_menezes
  */
-public class Rodada {
+public class Tabela {
     private int codigo;
-    private ArrayList<Confronto> confrontos = new ArrayList<>();
+    private ArrayList<Rodada> rodadas = new ArrayList<>();
 
-    public Rodada() {
-    }
-
-    public Rodada(int codigo, ArrayList<Confronto> confrontos) {
+    public Tabela(int codigo, ArrayList<Rodada> rodadas) {
         this.codigo = codigo;
-        this.confrontos = confrontos;
+        this.rodadas = rodadas;
     }
-    
+
+    public Tabela() {
+    }
+
     public int getCodigo() {
         return codigo;
     }
@@ -31,12 +31,12 @@ public class Rodada {
         this.codigo = codigo;
     }
 
-    public ArrayList<Confronto> getConfrontos() {
-        return confrontos;
+    public ArrayList<Rodada> getRodadas() {
+        return rodadas;
     }
 
-    public void setConfrontos(ArrayList<Confronto> confrontos) {
-        this.confrontos = confrontos;
+    public void setRodadas(ArrayList<Rodada> rodadas) {
+        this.rodadas = rodadas;
     }
     
 }
