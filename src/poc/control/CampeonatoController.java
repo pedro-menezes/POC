@@ -141,17 +141,15 @@ public class CampeonatoController {
         Campo campo = new Campo(0, " ");
         ArrayList<Time> times = campeonato.getTimes();
         ArrayList<Time> timeJogou = new ArrayList<Time>();
+        ArrayList<Time> timeLivre = new ArrayList<Time>();
         System.out.println("SIZE " + timeJogou.size());
+        Time timeA = times.get(times.size() - 1);
+        Time timeB = times.get(times.size() - 2);
 
         for (int i = 0; i < campeonato.getTimes().size() / 2; i++) {//for de confrontos
-            ArrayList<Time> times1 = campeonato.getTimes();
 
-            Time timeA = times.get(times.size() - 1);
-            Time timeB = times.get(times.size() - 2);
-            
-            
-            for (Time time : times1) {
-                if (timeJogou.size() == 0) {
+            if (confrontos.size() == 0) {
+                for (Time time : times) {
                     if (timeA.getPrioridade() > time.getPrioridade()) {
                         timeA = time;
                         System.out.println(timeA.getNome());
@@ -159,27 +157,51 @@ public class CampeonatoController {
                     if (timeB.getPrioridade() > time.getPrioridade() && time.getCodigo() != timeA.getCodigo()) {
                         timeB = time;
                     }
-                } else {
-                    for (int j = 0; j < campeonato.getTimes().size() / 2; j++) {   
-                    for (Confronto confronto : confrontos) {
-                        if (confronto.getTimeA() != time && confronto.getTimeB() != time) {
+                }
+            } else {
+                for (int j = 0; j < campeonato.getTimes().size() / 2; j++) {
+                    if (j == 0) {
+                        for (Time time : timeJogou) {
+                            if (timeA.getPrioridade() < time.getPrioridade()) {
+                                for (Confronto confronto : confrontos) {
+                                    if (time.getCodigo() == confronto.getTimeA().getCodigo() || time.getCodigo() == confronto.getTimeB().getCodigo()) {
+                                        System.out.println("ENTROU");
+                                        System.out.println("TIME: " + time.getNome());
+                                        System.out.println("TIMEA: " + confronto.getTimeA().getNome());
+                                        System.out.println("TIMEB: " + confronto.getTimeB().getNome());
+                                    } else {
+                                        timeA = time;
+                                        System.out.println(timeA.getNome());
+                                    }
+                                }
+
+                            }
+                            if (timeB.getPrioridade() < time.getPrioridade() && time.getCodigo() != timeA.getCodigo()) {
+                                for (Confronto confronto : confrontos) {
+                                    if (time.getCodigo() == confronto.getTimeA().getCodigo() || time.getCodigo() == confronto.getTimeB().getCodigo()) {
+                                        System.out.println("ENTROU");
+                                        System.out.println("TIME: " + time.getNome());
+                                        System.out.println("TIMEA: " + confronto.getTimeA().getNome());
+                                        System.out.println("TIMEB: " + confronto.getTimeB().getNome());
+                                    } else {
+                                        timeB = time;
+                                        System.out.println(timeA.getNome());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    /*if (confronto.getTimeA() == time && confronto.getTimeB() == time) {
                             System.out.println("ENTROU"
                                     + "TIME1: " + timeA.getNome() + timeB.getNome()
                                     + "TIME: " + time.getNome());
 
-                            if (timeA.getPrioridade() > time.getPrioridade()) {
-                                timeA = time;
-                                System.out.println(timeA.getNome());
-                            }
-                            if (timeB.getPrioridade() > time.getPrioridade() && time.getCodigo() != timeA.getCodigo()) {
-                                timeB = time;
-                            }
+                           
 
-                        }
-                    }
-                    }
+                        }*/
                 }
             }
+
             System.out.println("TIME A: " + timeA.getNome());
             System.out.println("TIME B: " + timeB.getNome());
 
@@ -188,8 +210,11 @@ public class CampeonatoController {
 
             Confronto confronto = new Confronto(confrontos.size() + 1, timeA, timeB, timeA.getCampo());
             confrontos.add(confronto);
+            Confronto confronto1 = new Confronto(confrontos.size() + 1, timeB, timeA, timeA.getCampo());
+            confrontos.add(confronto1);
             timeJogou.add(timeA);
             timeJogou.add(timeB);
+
         }
     }
 }
