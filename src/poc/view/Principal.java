@@ -58,7 +58,7 @@ public class Principal extends javax.swing.JFrame {
             modeloTabela.addRow(new String[]{"Sem informação", "Sem informação", "Sem informação"});
         } else {
             for (int i = 0; i < times.size(); i++) {
-                modeloTabela.addRow(new String[]{String.valueOf(times.get(i).getCodigo()), times.get(i).getNome(),String.valueOf(times.get(i).getPrioridade())});
+                modeloTabela.addRow(new String[]{String.valueOf(times.get(i).getCodigo()), times.get(i).getNome(), String.valueOf(times.get(i).getPrioridade())});
             }
         }
         tableTimes.setModel(modeloTabela);
@@ -192,7 +192,7 @@ public class Principal extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Símbolos", "Times", "Sede"
+                "Códigos", "Times", "Prioridade"
             }
         ) {
             Class[] types = new Class [] {
@@ -442,7 +442,32 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Não foi possível carregar o arquvio", "Erro de carregamento", ERROR);
         }
-        fornecerDados(elementos);
+        //  fornecerDados(elementos);
+        ArrayList<Time> times = new ArrayList<Time>();
+        CampeonatoController champControl = new CampeonatoController();
+        int cont = 1, cont1 = 2, cont2 = 3, cont3 = 4;
+
+        for (int i = 0; i < Integer.parseInt(elementos.get(0)); i++) {
+            Time time = new Time();
+            time.setCodigo(Integer.parseInt(elementos.get(i + cont)));
+            time.setNome(elementos.get(i + cont1));
+            Campo campo = new Campo(i, elementos.get(i + cont2));
+            time.setCampo(campo);
+            time.setPrioridade(Integer.parseInt(elementos.get(i + cont3)));
+            campeonato.getTimes().add(time);
+            cont = cont + 3;
+            cont1 = cont1 + 3;
+            cont2 = cont2 + 3;
+            cont3 = cont3 + 3;
+            System.out.println("NOME: " + time.getNome());
+            System.out.println("CODIGO: " + time.getCodigo());
+            System.out.println("PRIORIDADE: " + time.getPrioridade());
+        }
+        
+        for (int i = 0; i < campeonato.getTimes().size()+2 ; i++) {
+            
+        }
+
     }
 
     private void fornecerDados(ArrayList<String> elementosArquivo) {
@@ -452,28 +477,28 @@ public class Principal extends javax.swing.JFrame {
         Campo campo = new Campo();
         ModelDistancia distancia = new ModelDistancia();
         CampeonatoController champControl = new CampeonatoController();
-        int cont = 0, cont1 = 1, cont2 = 2, cont3 =3;
+        int cont = 0, cont1 = 1, cont2 = 2, cont3 = 3;
         /*       fw.write(time1.getCodigo() + ";" + time1.getNome() + ";" + time1.getCampo().getNome() + ";" + time1.getPrioridade() + newLine);
             }
             for (ModelDistancia distancia : distancias) {
                 fw.write(distancia.getTimeA().getCodigo() + ";" + distancia.getTimeB().getCodigo() + ";" + distancia.getDistancia() + newLine);
-           */
-        
-        for (int i = 0; i < (elementosArquivo.size()/2); i++) {
-            time.setCodigo(Integer.parseInt(elementosArquivo.get(i+cont)));
-            time.setNome(elementosArquivo.get(i+cont1));
-            campo.setNome(elementosArquivo.get(i+cont2));
+         */
+
+        for (int i = 0; i < (elementosArquivo.size() / 2); i++) {
+            time.setCodigo(Integer.parseInt(elementosArquivo.get(i + cont)));
+            time.setNome(elementosArquivo.get(i + cont1));
+            campo.setNome(elementosArquivo.get(i + cont2));
             campo.setCodigo(i);
             time.setCampo(campo);
-            time.setPrioridade(i+cont3);
+            time.setPrioridade(i + cont3);
             cont = cont + 4;
             cont1 = cont1 + 4;
             cont2 = cont2 + 4;
             cont3 = cont3 + 4;
             champControl.cadastrarTime(time, campeonato);
         }
-     {
-            
+        {
+
         }
     }
 
