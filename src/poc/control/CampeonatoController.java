@@ -108,10 +108,12 @@ public class CampeonatoController {
 
     public void organizarPosicoes(ArrayList<Time> times) {
         System.out.println("TIMES SIZE> " + times.size());
-        for (int i = 0; i < times.size(); i++) {
+      
+        for (int i = 0; i < times.size()-1; i++) {
             if (i != times.size()) {
-                Collections.swap(times, i, (i + 1));
+                Collections.swap(times, 0, (i + 1));
             }
+            
         }
         System.out.println("------");
         for (Time time : times) {
