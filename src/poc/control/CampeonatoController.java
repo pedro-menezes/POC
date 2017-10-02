@@ -113,7 +113,7 @@ public class CampeonatoController {
             if (i != times.size()) {
                 Collections.swap(times, 0, (i + 1));
             }
-            
+            System.out.println("SEU CU");
         }
         System.out.println("------");
         for (Time time : times) {
