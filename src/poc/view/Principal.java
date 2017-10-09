@@ -338,13 +338,20 @@ public class Principal extends javax.swing.JFrame {
         ArrayList<Time> time = campeonato.getTimes();
         ArrayList<ModelDistancia> distancias = campeonato.getDistancias();
         String newLine = System.getProperty("line.separator");
-        File arquivo = new File("Arquivo.champ");
+        File arquivo = new File("arquivo.champ");
+        boolean teste = false;
+        
         try {
-            if (arquivo.createNewFile()) {
+            teste = arquivo.createNewFile();
+            do{
+            if (teste == true) {
                 System.out.println("O arquivo foi criado");
-            } else {
+            } else if(arquivo.createNewFile() == false) {
+                arquivo.delete();
                 System.out.println("O arquivo não foi criado, talvez ele já exista");
+                teste = true;
             }
+            } while ( teste == false);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

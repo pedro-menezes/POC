@@ -24,7 +24,11 @@ import poc.view.Distancia;
 public class CampeonatoController {
 
     private ArrayList<Time> times = new ArrayList<Time>();
+    private ArrayList<Confronto> confrontos;
+    private ArrayList<Rodada> rodadas = new ArrayList<Rodada>();
     private int ordem;
+    private Integer timeObservado = 1;
+    
 
     public CampeonatoController() {
 
@@ -60,34 +64,118 @@ public class CampeonatoController {
     public void gerarTabela(Campeonato campeonato) {
         times = campeonato.getTimes();
         organizaMenorInicial(times);
-        organizarPosicoes(times);
+        for (int i = 0; i < times.size() - 1; i++) {
+            if (!montarPares(times)) {
+                while (true) {
+                    if(timeObservado == times.size()-1){
+                        organizarPosicoes(times);
+                    }else{
+                        timeObservado++;
+                    }
+                    if(montarPares(times)){
+                        break;
+                    }
+                }
+            }else{
+                timeObservado = 1;
+            }
+
+            for (Rodada r : rodadas) {
+                System.out.println("-----RODADA\n" + r.toString());
+            }
+        }
     }
 
-    public boolean verificaJogou(Time time1, Time time2) {
+    public boolean verificaJogouTurno(Time time1, Time time2) {
+        if (time1 != time2) {
+            boolean teste = time1.getJogou(time2.getCodigo());
+            teste = time2.getJogou(time1.getCodigo());
+            return teste;
+        }
+        return true;
+    }
+
+    public boolean verificaJogouRodada(Time time) {
+        for (Confronto confronto : confrontos) {
+            if (confronto.getTimeA() == time || confronto.getTimeB() == time) {
+                return true;
+            }
+        }
         return false;
     }
 
-    public void montarPares(ArrayList<Time> times) {
-        ArrayList<Confronto> confrontos = new ArrayList<Confronto>();
-        Confronto confronto = new Confronto();
-        int a = 0;
-        int b = 1;
-        Time time1 = times.get(a);
-        Time time2 = times.get(b);
-        int cont = 1;
+    public boolean montarPares(ArrayList<Time> times) {
+        confrontos = new ArrayList<Confronto>();
+        Confronto confronto;
+        int codigo2 = timeObservado;
+        int codigo1 = 0;
+        Time time1 = times.get(codigo1);
+        Time time2 = times.get(codigo2);
+        int contConfronto = 1;
+        boolean achouConfronto = false;
 
-        for (int i = 0; i < times.size(); i++) {
-            if (verificaJogou(time1, time2) == false) {
-                confronto.setCodigo(cont);
-                confronto.setTimeA(time1);
-                confronto.setTimeB(time2);
-                confrontos.add(confronto);
-                break;
-            } else if (verificaJogou(time1, time2) == true) {
-                
+        for (int j = 0; j < times.size() / 2; j++) { //rodadas
+            for (int i = codigo1; i < times.size(); i++) { //time1
+                if (verificaJogouRodada(time1) == false) {
+                    for (int k = 0; k < times.size(); k++) { //time2
+                        if (verificaJogouRodada(time2) == false) {
+                            if (verificaJogouTurno(time1, time2) == false) {
+                                confronto = new Confronto();
+                                confronto.setCodigo(contConfronto);
+                                confronto.setTimeA(time1);
+                                confronto.setTimeB(time2);
+                                confrontos.add(confronto);
+                                achouConfronto = true;
+                                break;
+                            }
+                        }
+                        if (codigo2 < times.size() - 1) {
+                            codigo2++;
+                            time2 = times.get(codigo2);
+                        }
+                    }
+                }
+
+                if (achouConfronto || i == times.size() - 1) {
+                    break;
+                } else {
+                    codigo1++;
+                    time1 = times.get(codigo1);
+                    codigo2 = timeObservado;
+                    time2 = times.get(codigo2);
+                }
             }
+            time1.setJogou(time2.getCodigo());
+            time2.setJogou(time1.getCodigo());
+            System.out.println("ACHOU-> " + time1.getNome() + " x " + time2.getNome());
+
+            if (codigo1 < times.size() - 1) {
+                codigo1++;
+                time1 = times.get(codigo1);
+            }
+
+            codigo2 = timeObservado;
+            time2 = times.get(codigo2);
+            contConfronto++;
+            achouConfronto = false;
         }
 
+        if (confrontos.size() == times.size() / 2) {
+            Rodada rodada = new Rodada();
+            rodada.setConfrontos(confrontos);
+            rodadas.add(rodada);
+
+            for (Confronto confronto1 : confrontos) {
+                System.out.println("CONFRONTO-> " + confronto1.getTimeA().getNome() + " x " + confronto1.getTimeB().getNome());
+            }
+            return true;
+        } else {
+            for (Confronto confronto1 : confrontos) {
+                confronto1.getTimeA().desfazerSetJogou();
+                confronto1.getTimeB().desfazerSetJogou();
+            }
+        }
+        return false;
     }
 
     public void organizaMenorInicial(ArrayList<Time> times) {
@@ -107,13 +195,11 @@ public class CampeonatoController {
     }
 
     public void organizarPosicoes(ArrayList<Time> times) {
-        System.out.println("TIMES SIZE> " + times.size());
-      
-        for (int i = 0; i < times.size()-1; i++) {
+
+        for (int i = 0; i < times.size() - 1; i++) {
             if (i != times.size()) {
-                Collections.swap(times, 0, (i + 1));
+                Collections.swap(times, i, (i + 1));
             }
-            System.out.println("SEU CU");
         }
         System.out.println("------");
         for (Time time : times) {

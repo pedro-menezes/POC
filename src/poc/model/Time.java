@@ -40,14 +40,21 @@ public class Time {
     }
 
     public boolean getJogou(int codigo) {
+        boolean teste = false;
         for (int i = 0; i < timesJogados.size(); i++) {
             if (timesJogados.get(i) == codigo) {
                 return true;
+            } else if (timesJogados.get(i) == null) {
+                teste = false;
             }
         }
-        return false;
+        return teste;
     }
-
+    
+    public void desfazerSetJogou(){
+        timesJogados.remove(timesJogados.size()-1);
+    }
+    
     public String getAbreviacao() {
         return abreviacao;
     }

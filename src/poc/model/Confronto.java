@@ -57,4 +57,11 @@ public class Confronto {
         this.local = local;
     }
     
+    public boolean verificaJogou(Time time){
+        if (time == timeA || time == timeB) {
+            return true;
+        }
+        return false;
+    }
+    
 }
