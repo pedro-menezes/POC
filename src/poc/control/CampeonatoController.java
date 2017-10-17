@@ -26,6 +26,7 @@ public class CampeonatoController {
     private ArrayList<Time> times = new ArrayList<Time>();
     private ArrayList<Confronto> confrontos;
     private ArrayList<Rodada> rodadas = new ArrayList<Rodada>();
+   private TabelaController tabelaControl;
     private int ordem;
     private Integer timeObservado = 1;
     
@@ -84,6 +85,9 @@ public class CampeonatoController {
                 System.out.println("-----RODADA\n" + r.toString());
             }
         }
+        campeonato.setRodadas(rodadas);
+        tabelaControl = new TabelaController();
+        tabelaControl.gerarTabela(campeonato);
     }
 
     public boolean verificaJogouTurno(Time time1, Time time2) {

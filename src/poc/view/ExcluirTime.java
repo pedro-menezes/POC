@@ -28,7 +28,7 @@ import poc.model.Time;
  *
  * @author Leandro
  */
-public class AdicionarTime extends javax.swing.JInternalFrame {
+public class ExcluirTime extends javax.swing.JInternalFrame {
 
     private Campeonato campeonato;
     private TimeController timeControl;
@@ -41,7 +41,7 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
     /**
      * Creates new form AdicionarTimee
      */
-    public AdicionarTime(Campeonato campeonato) {
+    public ExcluirTime(Campeonato campeonato) {
         initComponents();
         this.campeonato = campeonato;
         organizarCombo();
@@ -94,13 +94,14 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
         buttonEscudo = new javax.swing.JButton();
         labelCampo = new javax.swing.JLabel();
         textCampo = new javax.swing.JTextField();
+        labelNome1 = new javax.swing.JLabel();
 
         setClosable(true);
-        setTitle("Adicionar Time");
+        setTitle("Excluir Time");
         setToolTipText("");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setDoubleBuffered(true);
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/poc/view/icons/addTime.png"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/poc/view/icons/excluirTime.png"))); // NOI18N
 
         labelNome.setText("Nome");
 
@@ -142,42 +143,48 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
 
         labelCampo.setText("Campo:");
 
+        labelNome1.setText("Nome");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelNome1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboPrioridade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(butttonCancelar)
                         .addGap(18, 18, 18)
                         .addComponent(buttonConfirmar)
                         .addGap(18, 18, 18)
                         .addComponent(buttonAddOutro))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelAbreviacao)
+                            .addComponent(labelNome))
+                        .addGap(7, 7, 7)
+                        .addComponent(textAbreviacao))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelPrioridade)
+                            .addComponent(labelEscudo)
+                            .addComponent(labelCampo))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelAbreviacao)
-                                    .addComponent(labelNome))
-                                .addGap(7, 7, 7)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textAbreviacao)
-                                    .addComponent(textNome)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelPrioridade)
-                                    .addComponent(labelEscudo)
-                                    .addComponent(labelCampo))
                                 .addGap(13, 13, 13)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comboPrioridade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(buttonEscudo)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(textCampo))))))
+                                    .addComponent(textCampo)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textNome)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -185,16 +192,18 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelNome)
-                    .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(comboPrioridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNome1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelNome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelAbreviacao)
                     .addComponent(textAbreviacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelPrioridade)
-                    .addComponent(comboPrioridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelEscudo)
@@ -203,7 +212,7 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelCampo)
                     .addComponent(textCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAddOutro)
                     .addComponent(buttonConfirmar)
@@ -299,6 +308,7 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
     private javax.swing.JLabel labelCampo;
     private javax.swing.JLabel labelEscudo;
     private javax.swing.JLabel labelNome;
+    private javax.swing.JLabel labelNome1;
     private javax.swing.JLabel labelPrioridade;
     private javax.swing.JFileChooser seletorArquivos;
     private javax.swing.JTextField textAbreviacao;

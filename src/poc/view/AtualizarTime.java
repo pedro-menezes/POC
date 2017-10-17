@@ -28,7 +28,7 @@ import poc.model.Time;
  *
  * @author Leandro
  */
-public class AdicionarTime extends javax.swing.JInternalFrame {
+public class AtualizarTime extends javax.swing.JInternalFrame {
 
     private Campeonato campeonato;
     private TimeController timeControl;
@@ -37,22 +37,37 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
     private Campo campo;
     private Time time;
     private ArrayList<Time> times = new ArrayList<Time>();
+    private int contador = 0;
 
     /**
      * Creates new form AdicionarTimee
      */
-    public AdicionarTime(Campeonato campeonato) {
+    public AtualizarTime(Campeonato campeonato) {
         initComponents();
         this.campeonato = campeonato;
         organizarCombo();
         //removeTitleBar();
     }
 
-   public void organizarCombo() {
+    public void organizarCombo() {
         DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
 
         times = campeonato.getTimes();
 
+        for (Time time1 : times) {
+            modeloCombo.addElement(time1.getCodigo());
+        }
+
+        comboCodigo.setModel(modeloCombo);
+    }
+
+    public void organizarComboPrioridade(int prioridade) {
+        DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
+
+        times = campeonato.getTimes();
+
+        modeloCombo.addElement(prioridade);
+        
         for (int i = 1; i < 101; i++) {
             if (verificaPrioridades(times, i) == false) {
                 modeloCombo.addElement(i);
@@ -71,6 +86,7 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
         }
         return false;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,36 +100,29 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
         labelNome = new javax.swing.JLabel();
         labelAbreviacao = new javax.swing.JLabel();
         labelPrioridade = new javax.swing.JLabel();
-        buttonAddOutro = new javax.swing.JButton();
         buttonConfirmar = new javax.swing.JButton();
         butttonCancelar = new javax.swing.JButton();
         textNome = new javax.swing.JTextField();
-        textAbreviacao = new javax.swing.JTextField();
-        comboPrioridade = new javax.swing.JComboBox<>();
-        labelEscudo = new javax.swing.JLabel();
-        buttonEscudo = new javax.swing.JButton();
+        comboCodigo = new javax.swing.JComboBox<>();
         labelCampo = new javax.swing.JLabel();
         textCampo = new javax.swing.JTextField();
+        textAbreviacao = new javax.swing.JTextField();
+        labelNome1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        comboPrioridade = new javax.swing.JComboBox<>();
 
         setClosable(true);
-        setTitle("Adicionar Time");
+        setTitle("Atualizar Time");
         setToolTipText("");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setDoubleBuffered(true);
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/poc/view/icons/addTime.png"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/poc/view/icons/atualizar.png"))); // NOI18N
 
-        labelNome.setText("Nome");
+        labelNome.setText("Nome:");
 
-        labelAbreviacao.setText("Abreviação");
+        labelAbreviacao.setText("Abreviação:");
 
-        labelPrioridade.setText("Prioridade");
-
-        buttonAddOutro.setText("Confirmar e Adicionar Outro");
-        buttonAddOutro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAddOutroActionPerformed(evt);
-            }
-        });
+        labelPrioridade.setText("Prioridade:");
 
         buttonConfirmar.setText("Confirmar");
         buttonConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -129,18 +138,18 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
             }
         });
 
-        comboPrioridade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100" }));
-
-        labelEscudo.setText("Escudo");
-
-        buttonEscudo.setText("Importar...");
-        buttonEscudo.addActionListener(new java.awt.event.ActionListener() {
+        comboCodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100" }));
+        comboCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEscudoActionPerformed(evt);
+                comboCodigoActionPerformed(evt);
             }
         });
 
         labelCampo.setText("Campo:");
+
+        labelNome1.setText("Código:");
+
+        comboPrioridade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,63 +158,67 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
                         .addComponent(butttonCancelar)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonConfirmar)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonAddOutro))
+                        .addGap(262, 262, 262)
+                        .addComponent(buttonConfirmar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelAbreviacao)
-                                    .addComponent(labelNome))
-                                .addGap(7, 7, 7)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textAbreviacao)
-                                    .addComponent(textNome)))
+                                .addComponent(labelNome1)
+                                .addGap(47, 47, 47)
+                                .addComponent(comboCodigo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelPrioridade)
-                                    .addComponent(labelEscudo)
-                                    .addComponent(labelCampo))
-                                .addGap(13, 13, 13)
+                                    .addComponent(labelCampo)
+                                    .addComponent(labelAbreviacao, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelNome))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comboPrioridade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(buttonEscudo)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(textCampo))))))
+                                        .addGap(11, 11, 11)
+                                        .addComponent(textCampo))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(textNome)
+                                            .addComponent(textAbreviacao)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(labelPrioridade)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboPrioridade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelNome)
-                    .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(comboCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNome1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelAbreviacao)
-                    .addComponent(textAbreviacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNome))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textAbreviacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelAbreviacao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelPrioridade)
                     .addComponent(comboPrioridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelEscudo)
-                    .addComponent(buttonEscudo))
-                .addGap(9, 9, 9)
+                    .addComponent(textCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelCampo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCampo)
-                    .addComponent(textCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonAddOutro)
                     .addComponent(buttonConfirmar)
                     .addComponent(butttonCancelar))
                 .addContainerGap())
@@ -219,86 +232,65 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_butttonCancelarActionPerformed
 
-    private void buttonEscudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEscudoActionPerformed
-        abrirSeletorArquivos();
-    }//GEN-LAST:event_buttonEscudoActionPerformed
-
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
         // TODO add your handling code here:
         campoControl = new CampoController();
-        campo = new Campo(1, textCampo.getText());
         champControl = new CampeonatoController();
         timeControl = new TimeController();
+        times = campeonato.getTimes();
 
-        int codigo = campeonato.getTimes().size() + 1;
+        System.out.println("CONTADOR => " + contador);
+        time = times.get(contador);
+
+        System.out.println("TESTE");
+        System.out.println("NOME: " + time.getNome());
+        System.out.println("ABREVIACAO" + time.getAbreviacao());
+        System.out.println("CODIGO: " + time.getCodigo());
+        System.out.println("PRIORIDADE: " + time.getPrioridade());
+
         int selecionado = Integer.parseInt(comboPrioridade.getSelectedItem().toString());
+        time.setNome(textNome.getText());
+        time.setAbreviacao(textAbreviacao.getText());
+        campo = time.getCampo();
+        campo.setNome(textCampo.getText());
+        time.setCampo(campo);
+        time.setPrioridade(selecionado);
 
-        time = new Time(codigo, textNome.getText(), selecionado, null, campo, textAbreviacao.getText());
-
-        if (timeControl.verificarCadastro(time, campeonato) == false) {
-            JOptionPane.showMessageDialog(null, "Time já cadastrado!", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
-        } else {
-            champControl.cadastrarTime(time, campeonato);
-            times = campeonato.getTimes();
-            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
-        }
-
-        this.dispose();
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
-    private void buttonAddOutroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddOutroActionPerformed
+    private void comboCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCodigoActionPerformed
         // TODO add your handling code here:
-        campoControl = new CampoController();
-        campo = new Campo(1, textCampo.getText());
-        champControl = new CampeonatoController();
-        timeControl = new TimeController();
+        times = campeonato.getTimes();
+        int selecionado = Integer.parseInt(comboCodigo.getSelectedItem().toString());
+        int contador = 0;
 
-        int codigo = campeonato.getTimes().size() + 1;
-        int selecionado = Integer.parseInt(comboPrioridade.getSelectedItem().toString());
-
-        time = new Time(codigo, textNome.getText(), selecionado, null, campo, textAbreviacao.getText());
-
-        if (timeControl.verificarCadastro(time, campeonato) == false) {
-            JOptionPane.showMessageDialog(null, "Time já cadastrado!", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
-
-        } else {
-            champControl.cadastrarTime(time, campeonato);
-            times = campeonato.getTimes();
-
-            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
-        }
-
-        System.out.println("Lista de Cadastrados");
         for (Time time1 : times) {
-            System.out.println(time1.getNome());
-        }
-        
-        organizarCombo();
-        /* if (campoControl.verificar(textCampo.getText(), champControl) == true) {
-            campo = campoControl.cadastrar(textCampo.getText());
-            if (timeControl.verificar(textNome.getText()) == true) {
-                time = new Time(0, textNome.getText(), comboPrioridade.getItemCount(), null, campo, textAbreviacao.getText());
-                int cont = champControl.tamanhoArray();
-                times[cont + 1] = time;
-                champControl.addTime(times);
+            if (time1.getCodigo() == selecionado) {
+                organizarComboPrioridade(time1.getPrioridade());
+                textNome.setText(time1.getNome());
+                System.out.println(time1.getAbreviacao());
+                textAbreviacao.setText(time1.getAbreviacao());
+                textCampo.setText(time1.getCampo().getNome());
+                //comboPrioridade.setSelectedIndex();
+                break;
             }
-        } else if (campoControl.verificar(textCampo.getText(), champControl) == false) {
+            contador++;
+        }
 
-        }*/
-
-    }//GEN-LAST:event_buttonAddOutroActionPerformed
+        this.contador = contador;
+    }//GEN-LAST:event_comboCodigoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAddOutro;
     private javax.swing.JButton buttonConfirmar;
-    private javax.swing.JButton buttonEscudo;
     private javax.swing.JButton butttonCancelar;
+    private javax.swing.JComboBox<String> comboCodigo;
     private javax.swing.JComboBox<String> comboPrioridade;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelAbreviacao;
     private javax.swing.JLabel labelCampo;
-    private javax.swing.JLabel labelEscudo;
     private javax.swing.JLabel labelNome;
+    private javax.swing.JLabel labelNome1;
     private javax.swing.JLabel labelPrioridade;
     private javax.swing.JFileChooser seletorArquivos;
     private javax.swing.JTextField textAbreviacao;

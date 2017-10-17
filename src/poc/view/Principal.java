@@ -78,13 +78,17 @@ public class Principal extends javax.swing.JFrame {
         toolBar = new javax.swing.JToolBar();
         buttonAbrir = new javax.swing.JButton();
         butonSalvar = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
         buttonAddTime = new javax.swing.JButton();
+        buttonAtualizar = new javax.swing.JButton();
+        buttonDistancias1 = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
         buttonDistancias = new javax.swing.JButton();
         buttonTabela = new javax.swing.JButton();
-        buttonAtualizar = new javax.swing.JButton();
         desktopPane = new javax.swing.JDesktopPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTimes = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
         itemAddTime = new javax.swing.JMenuItem();
@@ -129,6 +133,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         toolBar.add(butonSalvar);
+        toolBar.add(jSeparator1);
 
         buttonAddTime.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poc/view/icons/addTime.png"))); // NOI18N
         buttonAddTime.setToolTipText("Adicionar Time");
@@ -141,6 +146,31 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         toolBar.add(buttonAddTime);
+
+        buttonAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poc/view/icons/atualizar.png"))); // NOI18N
+        buttonAtualizar.setToolTipText("Atualizar");
+        buttonAtualizar.setFocusable(false);
+        buttonAtualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonAtualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtualizarActionPerformed(evt);
+            }
+        });
+        toolBar.add(buttonAtualizar);
+
+        buttonDistancias1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poc/view/icons/excluirTime.png"))); // NOI18N
+        buttonDistancias1.setToolTipText("Excluir Times");
+        buttonDistancias1.setFocusable(false);
+        buttonDistancias1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonDistancias1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonDistancias1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDistancias1ActionPerformed(evt);
+            }
+        });
+        toolBar.add(buttonDistancias1);
+        toolBar.add(jSeparator2);
 
         buttonDistancias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poc/view/icons/distancia.png"))); // NOI18N
         buttonDistancias.setToolTipText("Cadastrar Distâncias");
@@ -165,18 +195,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         toolBar.add(buttonTabela);
-
-        buttonAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poc/view/icons/atualizar.png"))); // NOI18N
-        buttonAtualizar.setToolTipText("Atualizar");
-        buttonAtualizar.setFocusable(false);
-        buttonAtualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        buttonAtualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        buttonAtualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAtualizarActionPerformed(evt);
-            }
-        });
-        toolBar.add(buttonAtualizar);
 
         desktopPane.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
@@ -212,21 +230,33 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableTimes);
 
+        jButton1.setText("Atualizar Tabela");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         desktopPane.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPane.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout desktopPaneLayout = new javax.swing.GroupLayout(desktopPane);
         desktopPane.setLayout(desktopPaneLayout);
         desktopPaneLayout.setHorizontalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE))
         );
         desktopPaneLayout.setVerticalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 384, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopPaneLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1))
             .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE))
+                .addGroup(desktopPaneLayout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 29, Short.MAX_VALUE)))
         );
 
         menuBar.setBackground(new java.awt.Color(255, 255, 255));
@@ -318,14 +348,17 @@ public class Principal extends javax.swing.JFrame {
     private void buttonAddTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddTimeActionPerformed
         AdicionarTime addTime = new AdicionarTime(campeonato);
         verifInternal(addTime);
-
-
     }//GEN-LAST:event_buttonAddTimeActionPerformed
 
     private void buttonDistanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDistanciasActionPerformed
         // TODO add your handling code here:
-        Distancia dist = new Distancia(campeonato);
-        verifInternal(dist);
+        if (campeonato.getTimes().size() != 0 && campeonato.getTimes().size() % 2 == 0) {
+            Distancia dist = new Distancia(campeonato);
+            verifInternal(dist);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "O número de times deve ser par", "ERRO", 0);
+        }
+
     }//GEN-LAST:event_buttonDistanciasActionPerformed
 
     private void desktopPaneComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_desktopPaneComponentResized
@@ -340,25 +373,25 @@ public class Principal extends javax.swing.JFrame {
         String newLine = System.getProperty("line.separator");
         File arquivo = new File("arquivo.champ");
         boolean teste = false;
-        
+
         try {
             teste = arquivo.createNewFile();
-            do{
-            if (teste == true) {
-                System.out.println("O arquivo foi criado");
-            } else if(arquivo.createNewFile() == false) {
-                arquivo.delete();
-                System.out.println("O arquivo não foi criado, talvez ele já exista");
-                teste = true;
-            }
-            } while ( teste == false);
+            do {
+                if (teste == true) {
+                    System.out.println("O arquivo foi criado");
+                } else if (arquivo.createNewFile() == false) {
+                    arquivo.delete();
+                    System.out.println("O arquivo não foi criado, talvez ele já exista");
+                    teste = true;
+                }
+            } while (teste == false);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
         try (FileWriter fw = new FileWriter(arquivo)) {
             fw.write(time.size() + newLine);
             for (Time time1 : time) {
-                fw.write(time1.getCodigo() + ";" + time1.getNome() + ";" + time1.getCampo().getNome() + ";" + time1.getPrioridade() + newLine);
+                fw.write(time1.getCodigo() + ";" + time1.getNome()+ ";"+ time1.getAbreviacao() + ";" + time1.getCampo().getNome() + ";" + time1.getPrioridade() + newLine);
             }
             for (ModelDistancia distancia : distancias) {
                 fw.write(distancia.getTimeA().getCodigo() + ";" + distancia.getTimeB().getCodigo() + ";" + distancia.getDistancia() + newLine);
@@ -371,14 +404,29 @@ public class Principal extends javax.swing.JFrame {
 
     private void buttonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarActionPerformed
         // TODO add your handling code here:
-        organizarTabela();
+        AtualizarTime atualizarTime = new AtualizarTime(campeonato);
+        verifInternal(atualizarTime);
     }//GEN-LAST:event_buttonAtualizarActionPerformed
 
     private void buttonTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTabelaActionPerformed
         // TODO add your handling code here:
-        CampeonatoController champControl = new CampeonatoController();
-        champControl.gerarTabela(campeonato);
+        if (campeonato.getTimes().size() != 0 && campeonato.getTimes().size() % 2 == 0) {
+            CampeonatoController champControl = new CampeonatoController();
+            champControl.gerarTabela(campeonato);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "O número de times deve ser par", "ERRO", 0);
+        }
+
     }//GEN-LAST:event_buttonTabelaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        organizarTabela();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void buttonDistancias1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDistancias1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonDistancias1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -452,27 +500,30 @@ public class Principal extends javax.swing.JFrame {
         //  fornecerDados(elementos);
         ArrayList<Time> times = new ArrayList<Time>();
         CampeonatoController champControl = new CampeonatoController();
-        int cont = 1, cont1 = 2, cont2 = 3, cont3 = 4;
+        int cont = 1, cont1 = 2, cont2 = 3, cont3 = 4, cont4 = 5;
 
         for (int i = 0; i < Integer.parseInt(elementos.get(0)); i++) {
             Time time = new Time();
             time.setCodigo(Integer.parseInt(elementos.get(i + cont)));
             time.setNome(elementos.get(i + cont1));
-            Campo campo = new Campo(i, elementos.get(i + cont2));
+            time.setAbreviacao(elementos.get(i + cont2));
+            Campo campo = new Campo(i, elementos.get(i + cont3));
             time.setCampo(campo);
-            time.setPrioridade(Integer.parseInt(elementos.get(i + cont3)));
+            time.setPrioridade(Integer.parseInt(elementos.get(i + cont4)));
             campeonato.getTimes().add(time);
-            cont = cont + 3;
-            cont1 = cont1 + 3;
-            cont2 = cont2 + 3;
-            cont3 = cont3 + 3;
+            cont = cont + 4;
+            cont1 = cont1 + 4;
+            cont2 = cont2 + 4;
+            cont3 = cont3 + 4;
+            cont4 = cont4 + 4;
             System.out.println("NOME: " + time.getNome());
+            System.out.println("ABREVIACAO" + time.getAbreviacao());
             System.out.println("CODIGO: " + time.getCodigo());
             System.out.println("PRIORIDADE: " + time.getPrioridade());
         }
-        
-        for (int i = 0; i < campeonato.getTimes().size()+2 ; i++) {
-            
+
+        for (int i = 0; i < campeonato.getTimes().size() + 2; i++) {
+
         }
 
     }
@@ -552,6 +603,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton buttonAddTime;
     private javax.swing.JButton buttonAtualizar;
     private javax.swing.JButton buttonDistancias;
+    private javax.swing.JButton buttonDistancias1;
     private javax.swing.JButton buttonTabela;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem itemAbrir;
@@ -561,7 +613,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemSalvar;
     private javax.swing.JMenuItem itemSalvarComo;
     private javax.swing.JMenuItem itemTabela;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenuBar menuBar;

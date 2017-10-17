@@ -160,6 +160,8 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butonSalvarActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator1">
+        </Component>
         <Component class="javax.swing.JButton" name="buttonAddTime">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -173,6 +175,36 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddTimeActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="buttonAtualizar">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/poc/view/icons/atualizar.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Atualizar"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAtualizarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="buttonDistancias1">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/poc/view/icons/excluirTime.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Excluir Times"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDistancias1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
         </Component>
         <Component class="javax.swing.JButton" name="buttonDistancias">
           <Properties>
@@ -202,20 +234,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonTabelaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="buttonAtualizar">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/poc/view/icons/atualizar.png"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Atualizar"/>
-            <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAtualizarActionPerformed"/>
-          </Events>
-        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JDesktopPane" name="desktopPane">
@@ -226,7 +244,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" alignment="1" pref="754" max="32767" attributes="0"/>
               </Group>
@@ -234,9 +252,15 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="384" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="384" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="355" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="29" max="32767" attributes="0"/>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -262,6 +286,14 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Atualizar Tabela"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

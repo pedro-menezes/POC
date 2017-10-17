@@ -5,38 +5,85 @@
  */
 package poc.model;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+
 
 /**
  *
  * @author pedro_menezes
  */
 public class Tabela {
-    private int codigo;
-    private ArrayList<Rodada> rodadas = new ArrayList<>();
+    private Campeonato campeonato;
+    private String htmlTabela;
 
-    public Tabela(int codigo, ArrayList<Rodada> rodadas) {
-        this.codigo = codigo;
-        this.rodadas = rodadas;
+    public Tabela(Campeonato campeonato) {
+        this.campeonato = campeonato;
     }
 
-    public Tabela() {
+    public Campeonato getCampeonato() {
+        return campeonato;
     }
 
-    public int getCodigo() {
-        return codigo;
+    public void setCampeonato(Campeonato campeonato) {
+        this.campeonato = campeonato;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public String getHtmlTabela() {
+        return htmlTabela;
     }
 
-    public ArrayList<Rodada> getRodadas() {
-        return rodadas;
-    }
-
-    public void setRodadas(ArrayList<Rodada> rodadas) {
-        this.rodadas = rodadas;
+    public void setHtmlTabela(String htmlTabela) {
+        this.htmlTabela = htmlTabela;
     }
     
+    public File gerarTabela(){
+        File arquivo = new File("tabela.html");
+        boolean teste = false;
+        String newLine = System.getProperty("line.separator");
+        ArrayList<Rodada> rodadas = campeonato.getRodadas();
+        
+        try {
+            teste = arquivo.createNewFile();
+            do{
+            if (teste == true) {
+                System.out.println("O arquivo foi criado");
+            } else if(arquivo.createNewFile() == false) {
+                arquivo.delete();
+                System.out.println("O arquivo não foi criado, talvez ele já exista");
+                teste = true;
+            }
+            } while ( teste == false);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        try (FileWriter fw = new FileWriter(arquivo)) {
+            fw.write("<!DOCTYPE html><html><head><style>table {border-collapse: collapse;width: 100%;}th, td {text-align:left;padding: 8px;}tr:nth-child(even){background-color: #f2f2f2}th {background-color: #4CAF50;color: white;}</style></head><body>");
+            fw.write(newLine);
+            fw.write("<h2>Tabela</h2>");
+            fw.write(newLine);
+            fw.write("<table>");
+            fw.write(newLine);
+            
+            for (Rodada rodada : rodadas) {
+                ArrayList<Confronto> confrontos = rodada.getConfrontos();
+                fw.write("<tr><th>Time 1</th><th>Time 2</th><th>Campo</th></tr>");
+                for (Confronto confronto : confrontos) {
+                    fw.write("<tr>");
+                    fw.write("    <td>" + confronto.getTimeA().getNome() + "</td>");
+                    fw.write("    <td>" + confronto.getTimeB().getNome() + "</td>");
+                    fw.write("    <td>" + confronto.getLocal()+ "</td>");
+                    fw.write("</tr>");
+                }
+            }
+                fw.write("</table></body></html>");
+            
+            fw.flush();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return arquivo;
+    }
 }

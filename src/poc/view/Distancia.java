@@ -147,7 +147,7 @@ public class Distancia extends javax.swing.JInternalFrame {
         int opcao = JOptionPane.showConfirmDialog(rootPane, "Deseja confirmar? Não poderá ser cadastrado outro time");
 
         if (opcao == 0) {
-            this.dispose();;
+            this.dispose();
             /*System.out.println(tableDistancia.getValueAt(1, 3));
             for (int i = 0; i < times.size(); i++) {
                 for (int j = 0; j < times.size(); j++) {
