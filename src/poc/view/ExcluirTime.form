@@ -38,49 +38,45 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="labelNome1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="comboPrioridade" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="butttonCancelar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="262" max="-2" attributes="0"/>
                       <Component id="buttonConfirmar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="buttonAddOutro" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="labelAbreviacao" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Component id="textAbreviacao" max="32767" attributes="0"/>
+                      <Component id="labelNome1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="comboCodigo" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="labelPrioridade" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelEscudo" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelCampo" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="buttonEscudo" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="textCampo" max="32767" attributes="0"/>
+                                  <Component id="labelNome" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelAbreviacao" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labelNomeEdit" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelAbreviacaoEdit" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labelCampo" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelPrioridade" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="textNome" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labelCampoEdit" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelPrioridadeEdit" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -92,34 +88,33 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="comboPrioridade" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="labelNome1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="labelNome" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labelAbreviacao" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textAbreviacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelNomeEdit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelAbreviacaoEdit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelAbreviacao" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labelPrioridade" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelPrioridadeEdit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labelEscudo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonEscudo" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labelCampo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textCampo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelCampoEdit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="38" max="32767" attributes="0"/>
+              <EmptySpace pref="56" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="buttonAddOutro" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="butttonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -131,26 +126,18 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="labelNome">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nome"/>
+        <Property name="text" type="java.lang.String" value="Nome:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelAbreviacao">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Abrevia&#xe7;&#xe3;o"/>
+        <Property name="text" type="java.lang.String" value="Abrevia&#xe7;&#xe3;o:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelPrioridade">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Prioridade"/>
+        <Property name="text" type="java.lang.String" value="Prioridade:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="buttonAddOutro">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Confirmar e Adicionar Outro"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddOutroActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="buttonConfirmar">
       <Properties>
@@ -168,11 +155,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butttonCancelarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="textNome">
-    </Component>
-    <Component class="javax.swing.JTextField" name="textAbreviacao">
-    </Component>
-    <Component class="javax.swing.JComboBox" name="comboPrioridade">
+    <Component class="javax.swing.JComboBox" name="comboCodigo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="100">
@@ -279,34 +262,44 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboCodigoActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="labelEscudo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Escudo"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="buttonEscudo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Importar..."/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEscudoActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelCampo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Campo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="textCampo">
-    </Component>
     <Component class="javax.swing.JLabel" name="labelNome1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="C&#xf3;digo: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelNomeEdit">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nome"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelAbreviacaoEdit">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Abrevia&#xe7;&#xe3;o"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelPrioridadeEdit">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Prioridade"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelCampoEdit">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Campo"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
   </SubComponents>
 </Form>

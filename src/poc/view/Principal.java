@@ -426,6 +426,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void buttonDistancias1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDistancias1ActionPerformed
         // TODO add your handling code here:
+        ExcluirTime excluirTime = new ExcluirTime(campeonato);
+        verifInternal(excluirTime);
     }//GEN-LAST:event_buttonDistancias1ActionPerformed
 
     /**

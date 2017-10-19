@@ -32,15 +32,18 @@ public class TimeController {
         return true;
     }
     
-    /*public boolean verificar(String nome){
-        campeonato = new Campeonato();
+    public void excluirTime(int selecionado, Campeonato campeonato){
+      
         times = campeonato.getTimes();
-        
-        for (Time time : times) {
-            if (time.getCampo().getNome().equals(nome)) {
-               return false;
+
+        for (int i = 0; i < times.size(); i++) {
+            Time time = times.get(i);
+
+            if (time.getCodigo() == selecionado) {
+                times.remove(time);
+                break;
             }
-        }
-        return true;
-    }*/
+        }  
+    }
+    
 }
