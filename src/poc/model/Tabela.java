@@ -60,21 +60,22 @@ public class Tabela {
             ex.printStackTrace();
         }
         try (FileWriter fw = new FileWriter(arquivo)) {
-            fw.write("<!DOCTYPE html><html><head><style>table {border-collapse: collapse;width: 100%;}th, td {text-align:left;padding: 8px;}tr:nth-child(even){background-color: #f2f2f2}th {background-color: #4CAF50;color: white;}</style></head><body>");
+            fw.write("<!DOCTYPE html><html><head><style>table {border-collapse: collapse;width: 100%;}th, td {text-align:left;padding: 8px;}tr:nth-child(even){background-color: #f2f2f2}th {background-color: #4CAF50;color: white;} .cabecalho{background-color: blue; }</style></head><body>");
             fw.write(newLine);
             fw.write("<h2>Tabela</h2>");
             fw.write(newLine);
             fw.write("<table>");
             fw.write(newLine);
+            fw.write("<tr><th style=\"background-color: #F9EDBE\">Time 1</th><th style=\"background-color: #F9EDBE\">Time 2</th><th style=\"background-color: #F9EDBE\">Campo</th></tr>");
             
             for (Rodada rodada : rodadas) {
                 ArrayList<Confronto> confrontos = rodada.getConfrontos();
-                fw.write("<tr><th>Time 1</th><th>Time 2</th><th>Campo</th></tr>");
+                fw.write("<tr><th>Rodada "+rodada.getCodigo()+"</th><th></th><th></th></tr>");
                 for (Confronto confronto : confrontos) {
                     fw.write("<tr>");
                     fw.write("    <td>" + confronto.getTimeA().getNome() + "</td>");
                     fw.write("    <td>" + confronto.getTimeB().getNome() + "</td>");
-                    fw.write("    <td>" + confronto.getLocal()+ "</td>");
+                    fw.write("    <td>" + confronto.getLocal().getNome()+ "</td>");
                     fw.write("</tr>");
                 }
             }

@@ -20,16 +20,17 @@ public class Time {
     private ImageIcon escudo;
     private Campo campo;
     private String abreviacao;
-    private double distanciaViajada;
+    private double distanciaViajada = 0;
     private ArrayList<Integer> timesJogados = new ArrayList<Integer>();
 
-    public Time(int codigo, String nome, int prioridade, ImageIcon escudo, Campo campo, String abreviacao) {
+    public Time(int codigo, String nome, int prioridade, ImageIcon escudo, Campo campo, String abreviacao, float distanciaViajada) {
         this.codigo = codigo;
         this.nome = nome;
         this.prioridade = prioridade;
         this.escudo = escudo;
         this.campo = campo;
         this.abreviacao = abreviacao;
+        this.distanciaViajada = distanciaViajada;
     }
 
     public Time() {

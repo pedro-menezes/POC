@@ -255,6 +255,9 @@ public class AtualizarTime extends javax.swing.JInternalFrame {
         campo.setNome(textCampo.getText());
         time.setCampo(campo);
         time.setPrioridade(selecionado);
+        JOptionPane.showMessageDialog(null, "Atualizado com sucesso!", "Atualização", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
+
 
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 

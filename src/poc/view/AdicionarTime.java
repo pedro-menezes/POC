@@ -233,7 +233,7 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
         int codigo = campeonato.getTimes().size() + 1;
         int selecionado = Integer.parseInt(comboPrioridade.getSelectedItem().toString());
 
-        time = new Time(codigo, textNome.getText(), selecionado, null, campo, textAbreviacao.getText());
+        time = new Time(codigo, textNome.getText(), selecionado, null, campo, textAbreviacao.getText(), 0);
 
         if (timeControl.verificarCadastro(time, campeonato) == false) {
             JOptionPane.showMessageDialog(null, "Time já cadastrado!", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
@@ -256,7 +256,7 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
         int codigo = campeonato.getTimes().size() + 1;
         int selecionado = Integer.parseInt(comboPrioridade.getSelectedItem().toString());
 
-        time = new Time(codigo, textNome.getText(), selecionado, null, campo, textAbreviacao.getText());
+        time = new Time(codigo, textNome.getText(), selecionado, null, campo, textAbreviacao.getText(), 0);
 
         if (timeControl.verificarCadastro(time, campeonato) == false) {
             JOptionPane.showMessageDialog(null, "Time já cadastrado!", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
@@ -266,6 +266,9 @@ public class AdicionarTime extends javax.swing.JInternalFrame {
             times = campeonato.getTimes();
 
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+            textNome.setText("");
+            textAbreviacao.setText("");
+            textCampo.setText("");
         }
 
         System.out.println("Lista de Cadastrados");

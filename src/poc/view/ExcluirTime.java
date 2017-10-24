@@ -227,7 +227,7 @@ public class ExcluirTime extends javax.swing.JInternalFrame {
         int selecionado = Integer.parseInt(comboCodigo.getSelectedItem().toString());
         
         timeControl.excluirTime(selecionado, campeonato);
-        JOptionPane.showMessageDialog(null, "Excluido com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Excluido com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
 
     }//GEN-LAST:event_buttonConfirmarActionPerformed
